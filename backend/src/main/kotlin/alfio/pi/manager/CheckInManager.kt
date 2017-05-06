@@ -89,7 +89,10 @@ open class CheckInDataManager(@Qualifier("masterConnectionConfiguration") val ma
             }
             result
         })
-        val key = calcHash256(hmac)
+        //KF - removing hash
+        //val key = calcHash256(hmac)
+        val key = hmac
+
         val result = eventData[key]
         return tryOrDefault<CheckInResponse>().invoke({
             if(result != null && result !== ticketDataNotFound) {
@@ -151,7 +154,11 @@ open class CheckInDataManager(@Qualifier("masterConnectionConfiguration") val ma
         }
 
     internal fun loadCachedAttendees(eventName: String) : Pair<String, Map<String, String>> {
-        val url = "${master.url}/admin/api/check-in/$eventName/offline"
+
+        //KF - use local server
+        //val url = "${master.url}/admin/api/check-in/$eventName/offline"
+        val url = "http://localhost:8090/offline"
+
         return tryOrDefault<Pair<String, Map<String, String>>>().invoke({
             val request = Request.Builder()
                 .addHeader("Authorization", Credentials.basic(master.username, master.password))

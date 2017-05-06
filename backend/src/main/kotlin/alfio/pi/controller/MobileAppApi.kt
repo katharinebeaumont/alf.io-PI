@@ -41,10 +41,12 @@ open class CheckInApi(val checkInDataManager: CheckInDataManager, val environmen
                             @RequestBody ticketCode: TicketCode,
                             principal: Principal?): ResponseEntity<CheckInResponse> {
 
+        //KF - for eventbrite, just use substring to get ticket number
+        val uuid = ticketIdentifier.substring(9,18);
         val username = if((principal == null) and environment.acceptsProfiles("desk")) "desk-user" else principal?.name
         return Optional.ofNullable(username)
             .map {
-                ResponseEntity.ok(checkIn(eventName, ticketIdentifier, (ticketCode.code!!).substringAfter('/'), it!!).invoke(checkInDataManager))
+                ResponseEntity.ok(checkIn(eventName, uuid, uuid, it!!).invoke(checkInDataManager))
             }.orElseGet {
                 ResponseEntity(HttpStatus.UNAUTHORIZED)
             }
