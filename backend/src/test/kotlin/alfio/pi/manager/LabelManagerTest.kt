@@ -37,6 +37,7 @@ class LabelManagerTest {
         assertEquals("George William" to 18F, optimizeText("George William", maxLengthForSize, false))
         assertEquals("George W. H." to 22F, optimizeText("George William Henry", maxLengthForSize, true))
         assertEquals("George William " to 18F, optimizeText("George William Henry Arthur", maxLengthForSize, false))
+        assertEquals("Cmpny IT AG,  Information tec" to 9F, optimizeText("Cmpny IT AG,  Information technology services ", arrayOf(27 to 10F, 29 to 9F), false))
     }
 
 

@@ -74,7 +74,7 @@ open class DymoLW450Turbo41x89: LabelTemplate {
             it.newLineAtOffset(0F, -20F)
             it.showText(secondRowContent.first)
 
-            val thirdRowContent = optimizeText(labelContent.thirdRow, arrayOf(27 to 10F, 29 to 9F), true)
+            val thirdRowContent = optimizeText(labelContent.thirdRow, arrayOf(27 to 10F, 29 to 9F), false)//do not compact company name. Better cut it than write ugly names :-)
 
             it.setFont(font, thirdRowContent.second)
             it.newLineAtOffset(0F, -20F)
@@ -115,7 +115,7 @@ private fun checkTextLength(compactText: Boolean, content: String, fontSize: Flo
     }
 }
 
-private fun compact(text: String): String = text.splitToSequence(" ").mapIndexed { i, s -> if(i > 0) { "${s.substring(0,1)}." } else {s} }.joinToString(" ")
+private fun compact(text: String): String = text.trim().splitToSequence(" ").mapIndexed { i, s -> if(i > 0 && s.isNotEmpty()) { "${s.substring(0,1)}." } else {s} }.joinToString(" ")
 
 fun generatePDFLabel(firstName: String, lastName: String, company: String, ticketUUID: String): (LabelTemplate) -> ByteArray = { template ->
     val document = PDDocument()
