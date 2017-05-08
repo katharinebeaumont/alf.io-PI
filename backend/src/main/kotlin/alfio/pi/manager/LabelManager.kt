@@ -83,7 +83,7 @@ open class DymoLW450Turbo41x89: LabelTemplate {
             it.drawImage(labelContent.qrCode, 175F, 30F, 70F, 70F)
             it.setFont(font, 9F)
             it.beginText()
-            it.newLineAtOffset(189F, 25F)
+            it.newLineAtOffset(185F, 25F)
             it.showText(labelContent.qrText)
         }
     }
