@@ -364,7 +364,6 @@ open class PrinterWebSecurity: WebSecurityConfigurerAdapter() {
 }
 
 @Configuration
-@Profile("!dev")
 open class MvcConfiguration(@Value("\${alfio.version}") val alfioVersion: String, val environment: Environment): WebMvcConfigurerAdapter() {
     override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
         if(environment.acceptsProfiles("server", "full")) {

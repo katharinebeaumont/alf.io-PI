@@ -42,7 +42,7 @@ open class CheckInApi(val checkInDataManager: CheckInDataManager, val environmen
                             principal: Principal?): ResponseEntity<CheckInResponse> {
 
         //KF - for eventbrite, just use substring to get ticket number
-        val uuid = ticketIdentifier.substring(9,18);
+        val uuid = if(ticketIdentifier.length == 21) ticketIdentifier.substring(9,18) else ticketIdentifier
         val username = if((principal == null) and environment.acceptsProfiles("desk")) "desk-user" else principal?.name
         return Optional.ofNullable(username)
             .map {

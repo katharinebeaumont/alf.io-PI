@@ -157,7 +157,7 @@ open class CheckInDataManager(@Qualifier("masterConnectionConfiguration") val ma
 
         //KF - use local server
         //val url = "${master.url}/admin/api/check-in/$eventName/offline"
-        val url = "http://localhost:8090/offline"
+        val url = "${master.url}/offline"
 
         return tryOrDefault<Pair<String, Map<String, String>>>().invoke({
             val request = Request.Builder()

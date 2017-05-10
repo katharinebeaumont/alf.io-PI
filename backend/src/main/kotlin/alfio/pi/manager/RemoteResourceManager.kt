@@ -61,8 +61,7 @@ open class RemoteResourceManager(@Qualifier("masterConnectionConfiguration") val
         .invoke({
             val request = Request.Builder()
                 .addHeader("Authorization", Credentials.basic(configuration.username, configuration.password))
-                //.url("${configuration.url}$resource")
-                .url("http://localhost:8090/resource")
+                .url("${configuration.url}$resource")
                 .build()
             val client = if(timeoutMillis > -1L) {
                 httpClientWithCustomTimeout(timeoutMillis, TimeUnit.MILLISECONDS).invoke(httpClient)
